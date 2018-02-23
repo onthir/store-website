@@ -47,6 +47,7 @@ class Cart(models.Model):
 class Transaction(models.Model):
     product = models.ForeignKey(Product)
     quantity = models.IntegerField(default=None, null=True, blank=True)
+    cart_id = models.IntegerField(default=None, null=True, blank=True)
     selling_price = models.IntegerField()
     profit_or_loss = models.FloatField()
     sold_on = models.DateField(auto_now_add=True)

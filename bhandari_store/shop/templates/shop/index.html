@@ -9,13 +9,13 @@
                     <label for="productid">
                         Enter Products Code
                     </label>
-                    <input type="number" class="form-control" name="product_id" autocomplete="off"><br>
+                    <input type="number" class="form-control" name="product_id" autocomplete="off" autofocus><br>
                     <input type="submit" value="Search item" class="btn btn-md btn-danger">
                 </div>
             </form>
             <form action="" method="post">{% csrf_token %}
                 <p>Code: <strong style="color:black;">{{ product.id }}</strong></p>
-                <p>Products Name: <strong style="color:black;">{{ product.name }}</strong></p>
+                <p>Products Name: <strong style="color:white; font-size:35px; font-weight:bolder;">{{ product.name }}</strong></p>
                 <p>Remaining Stocks: <strong style="color:black;">{{ product.stocks }}</strong></p>
                 <p>Selling Price: <strong style="color:black;">{{ product.selling_price }}</strong></p>
                 <label for="qt">Enter Quantity</label>
@@ -44,7 +44,7 @@
                                 <td>{{ c.product }}</td>
                                 <td>{{ c.quantity }}</td>
                                 <td>{{c.amount}}</td>
-                                <td><a href="{% url 'shop:delete_item' c.product_id %}">Remove</a></td>
+                                <td><a href="{% url 'shop:delete_item' c.product_id c.id %}">Remove</a></td>
                                 </tr>
                           {% endfor %}
                         </tbody>

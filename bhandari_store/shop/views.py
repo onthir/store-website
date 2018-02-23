@@ -52,11 +52,10 @@ def home(request):
                         remark = 'Loss'
                     else:
                         remark = 'Profit'
-                    tr = Transaction(product=product, selling_price=product.selling_price, profit_or_loss=pl, sold_on=dt,remark=remark, total_amount=amount, quantity=quantity )
-                    tr.save()
-
                     # add to cart
                     cart.save()
+                    tr = Transaction(product=product, selling_price=product.selling_price, profit_or_loss=pl, sold_on=dt,remark=remark, total_amount=amount, quantity=quantity, cart_id=cart.id )
+                    tr.save()
                     carts = Cart.objects.all()
 
                     total = Cart.objects.aggregate(Sum('amount'))
@@ -143,16 +142,11 @@ def generate_bill(request):
         return redirect("shop:home")
     else:
         return redirect("shop:login_user")
-def delete_item(request, id):
+def delete_item(request, id, pid):
     if request.user.is_superuser:
-        try:
-            carts = Cart.objects.get(product_id=id)
-            transactions = Transaction.objects.get(product_id=id)
-            transactions.delete()
-        except:
-            carts = Cart.objects.filter(product_id=id)[1]
-            transactions = Transaction.objects.filter(product_id=id)[1]
-            transactions.delete()
+        carts = Cart.objects.get(product_id=id, id=pid)
+        transactions = Transaction.objects.get(product_id=id, cart_id=pid)
+        transactions.delete()
 
         product = Product.objects.get(id=carts.product_id)
         # get the purchased quantity
