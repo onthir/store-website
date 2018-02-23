@@ -1,0 +1,61 @@
+{% extends 'shop/base.html' %} {% block content %}
+<div class="container">
+    <h1 class="display-4 text-center">Bhandari Mart</h1>
+    <div class="row">
+        <div class="col-md-6" style="background:#289292; color:white; padding:15px;">
+            <h4>Transaction Manager</h4>
+            <form action="" method="get">
+                <div class="form-group">
+                    <label for="productid">
+                        Enter Products Code
+                    </label>
+                    <input type="number" class="form-control" name="product_id" autocomplete="off"><br>
+                    <input type="submit" value="Search item" class="btn btn-md btn-danger">
+                </div>
+            </form>
+            <form action="" method="post">{% csrf_token %}
+                <p>Code: <strong style="color:black;">{{ product.id }}</strong></p>
+                <p>Products Name: <strong style="color:black;">{{ product.name }}</strong></p>
+                <p>Remaining Stocks: <strong style="color:black;">{{ product.stocks }}</strong></p>
+                <p>Selling Price: <strong style="color:black;">{{ product.selling_price }}</strong></p>
+                <label for="qt">Enter Quantity</label>
+                <input type="number" class="form-control" name="qt" autocomplete="off"><br>
+                <input type="submit" value="Add To Cart" class="btn btn-md btn-warning">
+            </form>
+        </div>
+
+        <!-- tables of products -->
+        <div class="col-md-6" style="background:#292B2C; color:white; padding:15px;">
+            <h4>Live Invoice</h4>
+                <table class="table table-hover" style="color:white;">
+                        <thead>
+                          <tr>
+                            <th>Code</th>
+                            <th> Products Name</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in carts %}
+                                <tr>
+                                <th scope="row">{{ c.product.id }}</th>
+                                <td>{{ c.product }}</td>
+                                <td>{{ c.quantity }}</td>
+                                <td>{{c.amount}}</td>
+                                <td><a href="{% url 'shop:delete_item' c.product_id %}">Remove</a></td>
+                                </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      <h5>Total: {{ total }}</h5>
+                      <a href="{% url 'shop:generate_bill' %}" class="btn btn-md btn-primary">Generate Bill</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

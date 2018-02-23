@@ -1,0 +1,34 @@
+{% extends 'shop/base.html' %} 
+{% block content %}
+<h1 class="text-center">Search Results for '{{ query }}'</h1>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th> Products Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in products %}
+            <tr>
+                <th scope="row">{{ c.id }}</th>
+                <td>{{ c.name }}</td>
+                <td>{{ c.stocks }}</td>
+                <td>{{c.selling_price}}</td>
+                <td>
+                    <a href="{% url 'shop:update_stocks' c.slug %}">Update Stocks</a>/<a href="{% url 'shop:change_name' c.slug c.id %}">Change Name</a>/<a href="{% url 'shop:change_price' c.slug c.id %}">Change Price</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="{% url 'shop:home' %}" class="btn btn-md btn-danger">Return To Sales</a>
+    </div>
+</div>
+
+{% endblock %}

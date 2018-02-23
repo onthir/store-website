@@ -1,0 +1,79 @@
+{% extends 'shop/base.html' %} {% block content %}
+<div class="container">
+    <h1 class="text-center">Statistics - Bhandari Mart</h1>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                        style="text-decoration:none;">
+                        Today's Transaction
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body" style="padding:15px;">
+                    <div class="container">
+                        <h5>Date: {{ today }}</h5>
+                        <table class="table table-hover">
+                            <thead class="bg-inverse text-white">
+                                <tr>
+                                    <th>Code</th>
+                                    <th> Products Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for t in transactions %}
+                                <tr>
+                                    <th scope="row">{{ t.product.id }}</th>
+                                    <td>{{ t.product }}</td>
+                                    <td>{{ t.quantity }}</td>
+                                    <td>{{ t.selling_price }}</td>
+                                    <td>{{ t.total_amount }} </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- total sales profit and etc -->
+                        <i>Total Sales:</i>
+                        <strong> Rs. {{ total_sales }}</strong>
+                        <br>
+                        <i>Total Quantity Sold: </i>
+                        <strong> {{ total_quantity }}</strong>
+                        <br>
+                        <i>Total Profit: </i>
+                        <strong> Rs. {{ total_profit }}</strong>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" style="text-decoration:none;"
+                        aria-controls="collapseTwo">
+                        Total Report
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body" style="padding:15px;">
+                    <div class="container">
+                        <h5>Total Report As of Today</h5>
+                        <i>Total Sales: </i> <br>
+                        <i>Total Items Sold: </i> <br>
+                        <i>Total Profit: </i> <br>
+                        <i>Total Sales: </i> <br>
+                    </div>
+                </div>
+               
+        </div>
+    </div>
+    </div>
+        {% endblock %}

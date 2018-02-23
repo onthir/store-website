@@ -1,0 +1,35 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="text-center">{{ products.name }}</h1>
+        <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th> Products Name</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ products.id }}</th>
+                        <td>{{ products.name }}</td>
+                        <td>{{ products.stocks }}</td>
+                        <td>{{products.selling_price}}</td>
+                        <td>
+                            <a href="{% url 'shop:update_stocks' products.slug %}">Update Stocks</a>/<a href="{% url 'shop:change_name' slug=products.slug id=products.id %}">Change Name</a>/<a href="{% url 'shop:change_price' products.slug products.id %}">Change Price</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="{% url 'shop:showupdate' %}" class="btn btn-md btn-danger">Return To Full List</a>
+            </div>
+</div>
+
+{% endblock %}

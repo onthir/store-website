@@ -1,0 +1,39 @@
+{% extends 'shop/base.html' %} {% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- inputs -->
+                <div class="form-group">
+                    <label for="name">Products Name</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Products name" name="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="stocks">Stocks</label>
+                    <input type="number" class="form-control" id="stocks" aria-describedby="emailHelp" placeholder="Enter stocks" name="stocks">
+                </div>
+
+                <div class="form-group">
+                    <label for="cp">Cost Price</label>
+                    <input type="number" class="form-control" id="cp" aria-describedby="emailHelp" placeholder="Enter Cost proce" name="cp">
+                </div>
+
+                <div class="form-group">
+                    <label for="sp">Selling Price</label>
+                    <input type="number" class="form-control" id="sp" aria-describedby="emailHelp" placeholder="Enter selling price" name="sp">
+                </div>
+
+                <div class="form-group">
+                    <label for="edate">Expiry Date</label>
+                    <input type="date" class="form-control" id="edate" aria-describedby="emailHelp" placeholder="Enter stocks" name="edate">
+                </div>
+                <input type="submit" value="Add To Inventory" class="btn btn-md btn-danger">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="get">
+        <div class="form-group">
+            <label for="product">Enter Product ID</label>
+            <input class="form-control" type="number" name="id">
+        </div>
+    </form>
+        <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th> Products Name</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in products %}
+                    <tr>
+                        <th scope="row">{{ c.id }}</th>
+                        <td>{{ c.name }}</td>
+                        <td>{{ c.stocks }}</td>
+                        <td>{{c.selling_price}}</td>
+                        <td>
+                            <a href="{% url 'shop:update_stocks' c.slug %}">Update Stocks</a>/<a href="{% url 'shop:change_name' c.slug c.id %}">Change Name</a>/<a href="{% url 'shop:change_price' c.slug c.id %}">Change Price</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        <!-- pagination -->
+        {% if products.has_other_pages %}
+        <ul class="pagination">
+            {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo;</span>
+            </li>
+            {% endif %} {% for i in products.paginator.page_range %} {% if products.number == i %}
+            <li class=" page-item active">
+                <span class="page-link">{{ i }}
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %} {% endfor %} {% if questions.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.next_page_number }}">&raquo;</a>
+            </li>
+            {% else %}
+            <li class=" page-item disabled">
+                <span class="page-link">&raquo;</span>
+            </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

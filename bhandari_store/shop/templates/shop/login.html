@@ -1,0 +1,69 @@
+{% extends 'shop/base.html' %} {% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 id="brand" class="text-center text-white" id="brand">Bhandari
+                <span style="color:steelblue"> Mart</span>
+            </h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto" class="carde" style="padding:15px;">
+                    <span class="anchor" id="formLogin"></span>
+
+                    <!-- form card login -->
+                    <div class="card rounded-0">
+                        <div class="card-header" style="background-color:#2b3945; color:white;">
+                            <h3 class="mb-0 text-center">LOGIN</h3>
+                        </div>
+                        {% if error_message %}
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Error!</strong> {{ error_message }}
+                        </div>
+                        {% endif %}
+                        <div class="card-body" style="background:#9ad8e9;">
+                            <form class="form" role="form" method="post" enctype="multipart/form-data" id="formLogin" style="padding:15px;" >{% csrf_token %}
+                                <div class="form-group">
+                                    <label for="uname1">Username</label>
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="username" id="uname1" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" name="password" autocomplete="new-password">
+                                </div>
+                                <div>
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" onclick="myFunction()">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description small">Show Password</span>
+                                        <br/>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-md float-right">Login</button>
+                            </form>
+                        </div>
+                        <!--/card-block-->
+                    </div>
+                    <!-- /form card login -->
+
+                </div>
+
+
+            </div>
+            <!--/row-->
+
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
+<script type="text/javascript">
+    // to show the password
+    function myFunction() {
+        var x = document.getElementById("pwd1");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script> {% endblock %}
